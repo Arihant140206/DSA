@@ -9,38 +9,29 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
-public:
-    int preIndex = 0;
-
-    TreeNode* build(vector<int>& preorder, vector<int>& inorder,
-                    int inStart, int inEnd) {
-
-        if (inStart > inEnd)
-            return NULL;
-
-        // Create root from preorder
-        TreeNode* root = new TreeNode(preorder[preIndex++]);
-
-        // If leaf node
-        if (inStart == inEnd)
-            return root;
-
-        // Find root in inorder (linear search)
-        int mid;
-        for (mid = inStart; mid <= inEnd; mid++) {
-            if (inorder[mid] == root->val)
-                break;
-        }
-
-        // Build left and right subtrees
-        root->left = build(preorder, inorder, inStart, mid - 1);
-        root->right = build(preorder, inorder, mid + 1, inEnd);
-
-        return root;
+ class Solution{
+public://book se comapred halke halke changes hai code me par code logic is same 
+ 
+int find(vector<int>&in , int target,int start,int end){
+    for(int i=start;i<=end;i++)
+    {
+        if(in[i]==target)
+        return i;
     }
+return -1;
+}
 
+TreeNode*Tree(vector<int>&in,vector<int>&pre,int instart,int inend,int index)
+{
+    if(instart>inend)
+    return NULL;
+    TreeNode*root=new TreeNode(pre[index]);
+    int pos=find(in,pre[index],instart,inend);
+    root->left=Tree(in,pre,instart,pos-1,index+1);
+    root->right=Tree(in,pre,pos+1,inend,index+(pos-instart)+1);
+    return root;
+}//letcode me ye buidtree diya tha toh end me call karna padta hai apne actual tree wale fn ko bvuildtre ke andar also har jaqgah int* ke bajay vector<int>& use karna hai 
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        return build(preorder, inorder, 0, inorder.size() - 1);
+        return Tree(inorder, preorder, 0, inorder.size() - 1, 0);
     }
-};
+ };
