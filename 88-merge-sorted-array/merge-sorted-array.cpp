@@ -1,5 +1,5 @@
 class Solution {
-public:
+public://uysing 2 pointers
     void merge(vector<int>& a, int m, vector<int>& b, int n) {
 
         int i = 0;
