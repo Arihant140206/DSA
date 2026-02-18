@@ -18,6 +18,12 @@ public:
             temp=temp->next;
         };
         count-=n;
+        /*So we are asked to remove the 1st node from the start
+(which is also the Nth node from the end).
+
+In simple words:
+
+We need to delete the head node.*/
         if(count==0){
             temp=head;
             head=head->next;
