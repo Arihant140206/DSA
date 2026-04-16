@@ -1,35 +1,32 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-        vector<int> lower(26, 0);
-        vector<int> upper(26, 0);
-
-        // Count frequency
-        for (int i = 0; i < s.size(); i++) {
-            if (s[i] >= 'a')
-                lower[s[i] - 'a']++;
-            else
-                upper[s[i] - 'A']++;
+        unordered_map<char,int>f;
+        for(int i=0;i<s.size();i++)
+        {
+            f[s[i]]++;
         }
-
-        int count = 0;
-        bool odd = false;
-
-        // Process lowercase
-        for (int i = 0; i < 26; i++) {
-            count += (lower[i] / 2) * 2;  // take pairs
-            if (lower[i] % 2 == 1) odd = true;
+        bool odd=false;
+        int res=0;
+        for(auto i:f)
+        {
+            int val=i.second;
+            if(val%2==0)
+            res+=val;
+            else{
+                odd=true;
+            }
         }
+        if(odd==false)
+        return res;
 
-        // Process uppercase
-        for (int i = 0; i < 26; i++) {
-            count += (upper[i] / 2) * 2;
-            if (upper[i] % 2 == 1) odd = true;
+        for(auto i:f)
+        {
+            int val =i.second;
+            if(val%2==1)
+            res+=val-1;//3=2-1,1 will be left out
         }
+        return res+1;
 
-        // If there's at least one odd character, we can place it in the center
-        if (odd) count += 1;
-
-        return count;
     }
 };
