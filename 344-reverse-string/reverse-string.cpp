@@ -1,14 +1,18 @@
 class Solution {
 public:
+//using recursion
+    void helper(vector<char>&s,int start,int end){
+        //base case
+        if(start>=end)
+        return;
+
+        swap(s[start],s[end]);//working
+
+        helper(s,start+1,end-1);
+
+
+    }
     void reverseString(vector<char>& s) {
-        int n =s.size();
-        int start=0,end=n-1;
-        while(start<=end){
-            
-                swap(s[start],s[end]);
-                start++;
-                end--;
-            
-        }
+        helper(s,0,s.size()-1);
     }
 };
