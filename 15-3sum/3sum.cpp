@@ -20,6 +20,7 @@ public:
                     finalans.push_back({nums[left], nums[right], nums[val]});
                     left++;
                     right--;
+                    //check validity
                     while (left < right && nums[left] == nums[left - 1])
                      left++;
 
