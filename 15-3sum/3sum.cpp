@@ -10,8 +10,8 @@ public:
         continue;
         left=val+1;
         right=nums.size()-1;
-        {
-            while(left<right)
+        
+        while(left<right)
             {
                 int target=-1*(nums[val]);
                 int sum=nums[left]+nums[right];
@@ -36,7 +36,7 @@ public:
                 else
                 right--;
             }
-        }
+        
         }return finalans;
     }
 };
