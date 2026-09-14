@@ -9,6 +9,7 @@ public:
             }
             else if(st.top() == ch) {
                 st.pop();
+                continue;
             }
             else {
                 st.push(ch);
