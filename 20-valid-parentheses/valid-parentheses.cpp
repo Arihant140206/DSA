@@ -1,39 +1,38 @@
 class Solution {
 public:
     bool isValid(string s) {
-       stack<int>st;
-       for(int i=0;i<s.size();i++)
-       {
-        if(s[i]=='('||s[i]=='{'||s[i]=='[')
-        st.push(s[i]);
-        else{
-            if(st.empty())
-            return 0;
-            else if(s[i]==')')
-            {
-                if(st.top()!='(')
-                return 0;
-                else
-                st.pop();
-            }
-              else if(s[i]=='}')
-            {
-                if(st.top()!='{')
-                return 0;
-                else
-                st.pop();
-            }
+        stack<char> st;
 
-            else 
-            {
-                if(st.top()!='[')
-                return 0;
-                else
-                st.pop();
-            }
+for (char c : s) {
 
+    // Opening bracket → PUSH
+    if (c == '(' || c == '[' || c == '{') {
+        st.push(c);
+    }
 
-        }
-       } return st.empty();
-    };
+    // Closing bracket
+    else {
+
+        // Nothing to match
+        if (st.empty())
+            return false;
+
+        // Check matching pair
+        if (c == ')' && st.top() != '(')
+            return false;
+
+        if (c == ']' && st.top() != '[')
+            return false;
+
+        if (c == '}' && st.top() != '{')
+            return false;
+
+        // Match found → remove opening bracket
+        st.pop();
+    }
+}
+
+// Everything must be matched
+return st.empty();
+    }
 };
