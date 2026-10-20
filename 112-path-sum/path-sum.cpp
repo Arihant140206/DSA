@@ -9,34 +9,21 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
- class Solution {
+class Solution {
 public:
-
-    bool res = false;
-
-    void fun(TreeNode* root, int sum, int target)
-    {
-        if(root == NULL)
-            return;
-
-        sum += root->val;
-
-        if(root->left == NULL && root->right == NULL)
-        {
-            if(sum == target)
-                res = true;
-
-            return;
-        }
-
-        fun(root->left, sum, target);
-        fun(root->right, sum, target);
-    }
-
     bool hasPathSum(TreeNode* root, int targetSum) {
 
-        fun(root, 0, targetSum);
+        if (root==NULL)
+            return false;
 
-        return res;
+        if (root->left==NULL&&root->right==NULL) {
+            return root->val==targetSum;
+        }
+
+        targetSum = targetSum-root->val;
+
+        return hasPathSum(root->left,targetSum)
+               ||
+               hasPathSum(root->right,targetSum);
     }
 };
